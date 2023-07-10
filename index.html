@@ -111,7 +111,7 @@
         <h2>随机密码生成器</h2>
         <div class="form-group">
             <label for="length">密码长度：</label>
-            <input type="number" id="length" min="4" max="20" value="8">
+            <input type="number" id="length" min="4" max="1000" value="8">
         </div>
         <div class="form-group">
             <label>
@@ -148,13 +148,30 @@
     </div>
     <script>
         function generatePassword() {
-            var length = document.getElementById('length').value;
-            var includeLower = document.getElementById('includeLower').checked;
-            var includeUpper = document.getElementById('includeUpper').checked;
-            var includeNumbers = document.getElementById('includeNumbers').checked;
-            var includeSpecial = document.getElementById('includeSpecial').checked;
-			        var charset = '';
+            var lengthInput = document.getElementById('length');
+            var length = parseInt(lengthInput.value);
+            if (isNaN(length) || length <= 0) {
+                alert('密码长度必须为正数！');
+                lengthInput.value = '';
+                return;
+            }
+			        var includeLower = document.getElementById('includeLower').checked;
+        var includeUpper = document.getElementById('includeUpper').checked;
+        var includeNumbers = document.getElementById('includeNumbers').checked;
+        var includeSpecial = document.getElementById('includeSpecial').checked;
+
+        var charset = '';
         var password = '';
+
+        if (!(includeLower || includeUpper || includeNumbers || includeSpecial)) {
+            alert('请至少选择一个选项！');
+            return;
+        }
+
+        if (length > 1000) {
+            alert('密码长度不能超过1000！');
+            return;
+        }
 
         if (includeLower) {
             charset += 'abcdefghijklmnopqrstuvwxyz';
@@ -176,7 +193,6 @@
 
         document.getElementById('password').value = password;
     }
-
     function copyPassword() {
         var passwordInput = document.getElementById('password');
         passwordInput.select();
