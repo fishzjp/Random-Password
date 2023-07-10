@@ -3,108 +3,110 @@
 <head>
     <title>随机密码生成器</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="password-manager.png">
     <style>
         * {
             box-sizing: border-box;
         }
-		    body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-        margin: 0;
-        padding: 0;
-    }
 
-    .container {
-        max-width: 400px;
-        margin: 80px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
 
-    h2 {
-        text-align: center;
-        margin-top: 0;
-        color: #333;
-    }
+        .container {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-    .form-group {
-        margin-bottom: 20px;
-    }
+        h2 {
+            text-align: center;
+            margin-top: 0;
+            color: #333;
+        }
 
-    label {
-        display: flex;
-        align-items: center;
-        margin-bottom: 5px;
-        color: #333;
-        font-weight: bold;
-    }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-    input[type="number"],
-    input[type="button"],
-    input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        background-color: #f5f5f5;
-        font-family: Arial, sans-serif;
-        transition: border-color 0.3s;
-    }
+        label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
 
-    input[type="number"]:focus,
-    input[type="checkbox"]:focus,
-    input[type="button"]:focus,
-    input[type="text"]:focus {
-        outline: none;
-        border-color: #4CAF50;
-    }
+        input[type="number"],
+        input[type="button"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            transition: border-color 0.3s;
+        }
 
-    input[type="button"] {
-        background-color: #4CAF50;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-    }
+        input[type="number"]:focus,
+        input[type="checkbox"]:focus,
+        input[type="button"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
 
-    .password-output {
-        margin-top: 20px;
-    }
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
 
-    .password-output label {
-        display: block;
-        margin-bottom: 5px;
-        color: #333;
-        font-weight: bold;
-    }
+        .password-output {
+            margin-top: 20px;
+        }
 
-    .password-output input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        background-color: #f5f5f5;
-        font-family: monospace;
-    }
+        .password-output label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
 
-    .copy-button {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        background-color: #555;
-        color: #fff;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        margin-top: 20px;
-    }
+        .password-output input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: #f5f5f5;
+            font-family: monospace;
+        }
 
-    .copy-button:hover {
-        background-color: #333;
-    }
-</style>
+        .copy-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .copy-button:hover {
+            background-color: #333;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -155,51 +157,72 @@
                 lengthInput.value = '';
                 return;
             }
-			        var includeLower = document.getElementById('includeLower').checked;
-        var includeUpper = document.getElementById('includeUpper').checked;
-        var includeNumbers = document.getElementById('includeNumbers').checked;
-        var includeSpecial = document.getElementById('includeSpecial').checked;
 
-        var charset = '';
-        var password = '';
+            var includeLower = document.getElementById('includeLower').checked;
+            var includeUpper = document.getElementById('includeUpper').checked;
+            var includeNumbers = document.getElementById('includeNumbers').checked;
+            var includeSpecial = document.getElementById('includeSpecial').checked;
 
-        if (!(includeLower || includeUpper || includeNumbers || includeSpecial)) {
-            alert('请至少选择一个选项！');
-            return;
+            var charset = '';
+            var password = '';
+
+            if (!(includeLower || includeUpper || includeNumbers || includeSpecial)) {
+                alert('请至少选择一个选项！');
+                return;
+            }
+
+            if (length > 1000) {
+                alert('密码长度不能超过1000！');
+                return;
+            }
+
+            if (includeLower) {
+                charset += 'abcdefghijklmnopqrstuvwxyz';
+            }
+            if (includeUpper) {
+                charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            }
+            if (includeNumbers) {
+                charset += '0123456789';
+            }
+            if (includeSpecial) {
+                charset += '!@#$%^&*()_+~`|}{[]\\:;?><,./-=';
+            }
+
+            // Ensure at least one character of each selected type
+            if (includeLower && !/[a-z]/.test(password)) {
+                password += getRandomCharacter('abcdefghijklmnopqrstuvwxyz');
+            }
+            if (includeUpper && !/[A-Z]/.test(password)) {
+                password += getRandomCharacter('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+            }
+            if (includeNumbers && !/[0-9]/.test(password)) {
+                password += getRandomCharacter('0123456789');
+            }
+            if (includeSpecial && !/[!@#$%^&*()_+~`|}{\[\]\\:;?><,./-=]/.test(password)) {
+                password += getRandomCharacter('!@#$%^&*()_+~`|}{[]\\:;?><,./-=');
+            }
+
+            for (var i = password.length; i < length; i++) {
+                var randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset[randomIndex];
+            }
+
+            document.getElementById('password').value = password;
         }
 
-        if (length > 1000) {
-            alert('密码长度不能超过1000！');
-            return;
-        }
-
-        if (includeLower) {
-            charset += 'abcdefghijklmnopqrstuvwxyz';
-        }
-        if (includeUpper) {
-            charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        }
-        if (includeNumbers) {
-            charset += '0123456789';
-        }
-        if (includeSpecial) {
-            charset += '!@#$%^&*()_+~`|}{[]\:;?><,./-=';
-        }
-
-        for (var i = 0; i < length; i++) {
+        function getRandomCharacter(charset) {
             var randomIndex = Math.floor(Math.random() * charset.length);
-            password += charset[randomIndex];
+            return charset[randomIndex];
         }
 
-        document.getElementById('password').value = password;
-    }
-    function copyPassword() {
-        var passwordInput = document.getElementById('password');
-        passwordInput.select();
-        passwordInput.setSelectionRange(0, 99999); /* For mobile devices */
-        document.execCommand('copy');
-        alert('密码已复制到剪贴板！');
-    }
-</script>
+        function copyPassword() {
+            var passwordInput = document.getElementById('password');
+            passwordInput.select();
+            passwordInput.setSelectionRange(0, 99999); /* For mobile devices */
+            document.execCommand('copy');
+            alert('密码已复制到剪贴板！');
+        }
+    </script>
 </body>
 </html>
